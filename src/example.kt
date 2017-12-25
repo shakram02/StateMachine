@@ -16,7 +16,9 @@ fun main(args: Array<String>) {
                 println("Entered state ${it.name.javaClass.simpleName}")
             }
             edge(GoUp(), Input()) {
-                println("Going to Input")
+                action {
+                    println("Going to Input")
+                }
             }
         }
         state(Input()) {
@@ -43,7 +45,9 @@ fun main(args: Array<String>) {
                 println("Will get bored!")
             }
             edge(GoUp(), Repeat()) {
-                println("Repeating")
+                action {
+                    println("Repeating")
+                }
             }
         }
     }

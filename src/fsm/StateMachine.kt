@@ -5,8 +5,8 @@ package fsm
  */
 class StateMachine private constructor(private val initialState: BaseState) {
     private lateinit var currentState: State
-
     private val states = mutableListOf<State>()
+
     fun state(stateName: BaseState, init: State.() -> Unit) {
         val state = State(stateName)
         state.init()

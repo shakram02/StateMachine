@@ -7,20 +7,25 @@ I added strong-typing support and maybe other stuff.
 ## Example
 
 ```Kotlin
-fun main(args: Array<String>) {
-    // Inherit your custom events and states from provided base interfaces
-    class GoUp : BaseEvent
+import fsm.BaseEvent
+import fsm.BaseState
+import fsm.StateMachine
 
-    class Initial : BaseState
-    class Repeat : BaseState
+// Inherit your custom events and states from provided base classes
+class GoUp : BaseEvent()
+
+class Initial : BaseState()
+class Repeat : BaseState()
+
+fun main(args: Array<String>) {
 
     val m = StateMachine.buildStateMachine(Initial()) {
         state(Initial()) {
-        // Code written outside action{} will run as Kotlin's init{}
-        println("Initializing")
+            // Code written outside action{} will run as Kotlin's init{}
+            println("Initializing")
             // Code on state processing
             action {
-                println("Entered state ${it.name.javaClass.simpleName}")
+                println("Entered [${it.name.javaClass.simpleName}]")
             }
             edge(GoUp(), Repeat()) {
                 // Code of transition
@@ -31,7 +36,7 @@ fun main(args: Array<String>) {
         }
         state(Repeat()) {
             action {
-                println("Entered state ${it.name.javaClass.simpleName}")
+                println("Entered [${it.name.javaClass.simpleName}]")
             }
 
             // Multiple actions
@@ -46,7 +51,7 @@ fun main(args: Array<String>) {
             }
         }
     }
-    
+
     m.initialize()
     m.acceptEvent(GoUp())
     m.acceptEvent(GoUp())
@@ -56,14 +61,16 @@ fun main(args: Array<String>) {
 
 Output
 ```
-Entered state main$Initial
+Initializing
+Entered [Initial]
 Going to Repeat state
-Entered state main$Repeat
+Entered [Repeat]
 Will get bored!
 Repeating
-Entered state main$Repeat
+Entered [Repeat]
 Will get bored!
 Repeating
-Entered state main$Repeat
+Entered [Repeat]
 Will get bored!
+
 ```

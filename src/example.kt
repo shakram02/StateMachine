@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
     val m = StateMachine.buildStateMachine(Initial()) {
         state(Initial()) {
             action {
-                println("Entered state $it")
+                println("Entered [$it]")
             }
             edge(GoUp(), Input()) {
                 action {
@@ -24,7 +24,7 @@ fun main(args: Array<String>) {
         }
         state(Input()) {
             action {
-                println("Entered state $it")
+                println("Entered [$it]")
             }
 
             action {
@@ -40,7 +40,7 @@ fun main(args: Array<String>) {
 
         state(Repeat()) {
             action {
-                println("Entered state $it")
+                println("Entered [$it]")
             }
             action {
                 println("Will get bored!")

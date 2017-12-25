@@ -6,6 +6,12 @@ I added strong-typing support and maybe other stuff.
 
 ## Example
 
+The following code represents this FSM
+
+![alt text](./fsm.jpg)
+
+*Code*
+
 ```Kotlin
 import fsm.BaseEvent
 import fsm.BaseState
@@ -59,7 +65,8 @@ fun main(args: Array<String>) {
 }
 ```
 
-Output
+*Output*
+
 ```
 Initializing
 Entered [Initial]

@@ -4,8 +4,8 @@ package fsm
  *
  */
 class State(val name: BaseState) {
-    private val edges = mutableListOf<Edge>()
-    private val onEnterStateActions = mutableListOf<(State) -> Unit>()
+    private val edges = hashMapOf<BaseEvent, Edge>()   // Convert to HashMap with event as key
+    private val stateActions = mutableListOf<(State) -> Unit>()
 
     /**
      * Creates an edge from a [State] to another when a [BaseEvent] occurs
@@ -17,14 +17,18 @@ class State(val name: BaseState) {
         val edge = Edge(event, targetState)
         edge.init()
 
-        edges.add(edge)
+        if (edges.containsKey(event)) {
+            throw DFAError("Adding multiple edges for the same event is invalid")
+        }
+
+        edges.put(event, edge)
     }
 
     /**
      * Action performed by state
      */
     fun action(action: (State) -> Unit) {
-        onEnterStateActions.add(action)
+        stateActions.add(action)
     }
 
     /**
@@ -32,14 +36,18 @@ class State(val name: BaseState) {
      */
     fun enter() {
         // Every action takes the current state
-        onEnterStateActions.forEach { it(this) }
+        stateActions.forEach { it(this) }
     }
 
     /**
      * Get the appropriate fsm.Edge for the Event
      */
     fun getEdgeForEvent(event: BaseEvent): Edge {
-        return edges.first { it.hasTransitionOn(event) }
+        return edges[event]!!
+    }
+
+    override fun toString(): String {
+        return name.javaClass.simpleName
     }
 
 }

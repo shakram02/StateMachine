@@ -23,13 +23,7 @@ class Edge(private val event: BaseEvent, private val targetState: BaseState) {
         return getNextState(targetState)
     }
 
-    /**
-     * Check if this edge transitions on the given [BaseEvent]
-     */
-    fun hasTransitionOn(e: BaseEvent): Boolean {
-        return event.javaClass == e.javaClass
+    override fun toString(): String {
+        return "Edge to ${targetState.javaClass.simpleName} on ${event.javaClass.simpleName}"
     }
 }
-
-
-

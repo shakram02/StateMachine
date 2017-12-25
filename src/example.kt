@@ -2,18 +2,19 @@ import fsm.BaseEvent
 import fsm.BaseState
 import fsm.StateMachine
 
-fun main(args: Array<String>) {
-    // Inherit your custom events and states from provided base interfaces
-    class GoUp : BaseEvent
+// Inherit your custom events and states from provided base classes
+class GoUp : BaseEvent()
 
-    class Initial : BaseState
-    class Input : BaseState
-    class Repeat : BaseState
+class Initial : BaseState()
+class Input : BaseState()
+class Repeat : BaseState()
+
+fun main(args: Array<String>) {
 
     val m = StateMachine.buildStateMachine(Initial()) {
         state(Initial()) {
             action {
-                println("Entered state ${it.name.javaClass.simpleName}")
+                println("Entered state $it")
             }
             edge(GoUp(), Input()) {
                 action {
@@ -23,7 +24,7 @@ fun main(args: Array<String>) {
         }
         state(Input()) {
             action {
-                println("Entered state ${it.name.javaClass.simpleName}")
+                println("Entered state $it")
             }
 
             action {
@@ -39,7 +40,7 @@ fun main(args: Array<String>) {
 
         state(Repeat()) {
             action {
-                println("Entered state ${it.name.javaClass.simpleName}")
+                println("Entered state $it")
             }
             action {
                 println("Will get bored!")

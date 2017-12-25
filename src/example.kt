@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     val m = StateMachine.buildStateMachine(Initial()) {
         state(Initial()) {
             action {
-                println("Entered state ${it.name.javaClass.canonicalName}")
+                println("Entered state ${it.name.javaClass.simpleName}")
             }
             edge(GoUp(), Input()) {
                 println("Going to Input")
@@ -25,7 +25,7 @@ fun main(args: Array<String>) {
             }
 
             action {
-                println("Set motor-speed to 0")
+                println("another action is being executed")
             }
 
             edge(GoUp(), Repeat()) {

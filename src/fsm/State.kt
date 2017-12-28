@@ -43,7 +43,11 @@ class State(val name: BaseState) {
      * Get the appropriate fsm.Edge for the Event
      */
     fun getEdgeForEvent(event: BaseEvent): Edge {
-        return edges[event]!!
+        try {
+            return edges[event]!!
+        } catch (e: KotlinNullPointerException) {
+            throw IllegalStateException("Event $event isn't registered with state ${this.name}")
+        }
     }
 
     override fun toString(): String {

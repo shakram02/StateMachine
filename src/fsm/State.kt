@@ -40,7 +40,7 @@ class State(val name: BaseState) {
     }
 
     /**
-     * Get the appropriate fsm.Edge for the Event
+     * Get the appropriate [Edge] for the [BaseEvent]
      */
     fun getEdgeForEvent(event: BaseEvent): Edge {
         try {

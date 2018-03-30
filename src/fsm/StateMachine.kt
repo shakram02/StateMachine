@@ -18,8 +18,8 @@ class StateMachine private constructor(private val initialState: BaseState) {
      * Translates state name to an object
      */
     private fun getState(stateType: BaseState): State {
-        return states.firstOrNull { stateType.javaClass == it.name.javaClass } ?:
-                throw NoSuchElementException(stateType.javaClass.canonicalName)
+        return states.firstOrNull { stateType.javaClass == it.name.javaClass }
+                ?: throw NoSuchElementException(stateType.javaClass.canonicalName)
     }
 
     /**
@@ -50,6 +50,10 @@ class StateMachine private constructor(private val initialState: BaseState) {
             throw IllegalStateException("This state doesn't support " +
                     "transition on ${e.javaClass.simpleName}")
         }
+    }
+
+    fun getCurrentState(): BaseState {
+        return this.currentState.name
     }
 
     companion object {

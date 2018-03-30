@@ -25,6 +25,10 @@ abstract class Base {
     final override fun hashCode(): Int {
         return javaClass.hashCode()
     }
+
+    final override fun toString(): String {
+        return this.javaClass.simpleName
+    }
 }
 
 class DFAError(e: String) : Error(e)

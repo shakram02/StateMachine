@@ -1,5 +1,5 @@
 # Finite state machine
-[![](https://jitpack.io/v/shakram02/Kt-FSM.svg)](https://jitpack.io/#shakram02/Kt-FSM)
+[![](https://jitpack.io/v/shakram02/Kt-Fsm.svg)](https://jitpack.io/#shakram02/Kt-Fsm)
 
 An elegant finite state machine (DFA) written in Kotlin. 
 Base code was in [this answer](https://codereview.stackexchange.com/questions/143726/event-driven-finite-state-machine-dsl-in-kotlin)
@@ -20,7 +20,7 @@ Step 2. Add the dependency
 
 ```groovy
 dependencies {
-    compile 'com.github.shakram02:Kt-FSM:v0.0.1'
+    compile 'com.github.shakram02:Kt-FSM:v0.0.3'
 }
 ```
 

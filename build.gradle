@@ -21,8 +21,14 @@ repositories {
     mavenCentral()
 }
 
+
+configurations {
+    provided
+    compile.extendsFrom provided
+}
+
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    provided "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
@@ -33,11 +39,18 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+
 jar {
     from sourceSets.main.allSource
 
     // This line of code recursively collects and copies all of a project's files
     // and adds them to the JAR itself. One can extend this task, to skip certain
     // files or particular types at will
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    // Use provided to declare already present library that will be provided by the runtime
+    // I marked the kotlin-runtiume as provided
+    from {
+        (configurations.runtime - configurations.provided).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
 }

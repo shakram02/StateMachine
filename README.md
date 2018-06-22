@@ -21,7 +21,7 @@ Step 2. Add the dependency
 ```groovy
 dependencies {
     compile 'com.github.shakram02:Kt-FSM:v0.0.4'
-    implementation 'com.github.shakram02:Kt-FSM:v0.0.4'	// For android
+    // implementation 'com.github.shakram02:Kt-FSM:v0.0.4'	// For android
 }
 ```
 
